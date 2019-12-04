@@ -19,6 +19,7 @@ export default class ItemsContainer extends React.Component {
   }
 
   render(){
+    console.log(this.props.click_cart)
       return(
           <ItemList
             addToCart={this.props.addToCart}

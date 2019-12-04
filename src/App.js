@@ -2,7 +2,9 @@ import React from 'react';
 import './App.css';
 import Header from './Header'
 import LogIn from './LogIn'
+import Cart from './Cart'
 import ItemsContainer from './ItemsContainer'
+import { Route, Switch } from 'react-router-dom'
 
 class App extends React.Component {
 
@@ -74,6 +76,10 @@ class App extends React.Component {
       new_cart: []
     })
   }
+  
+  click_cart = () => {
+    "click cart test"
+  }
 
   render(){
     console.log("UserID", this.state.loggedInUserId)
@@ -85,14 +91,20 @@ class App extends React.Component {
         <div className="Header">
           <Header
             token={ this.state.token }
-            cart={ this.state.cart }
+            click_cart={ this.click_cart }
             logOut={ this.logOut }
           />
         </div>
+
+        <Switch>
+          <Route exact path="/cart" component={ Cart } />
+        </Switch>
+
         {
           !!this.state.token ?
             <ItemsContainer
               addToCart={ this.addToCart }
+              click_cart={ this.click_cart }
               token={ this.state.token }
               loggedInUserId={ this.state.loggedInUserId }
             />
