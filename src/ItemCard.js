@@ -2,6 +2,10 @@ import React from 'react';
 
 export default class ItemCard extends React.Component {
 
+on_click_functions = () => {
+    this.props.addToCart(this.props.item.id)
+}
+
     render(){
         const item = this.props.item.attributes
         return(
@@ -18,7 +22,7 @@ export default class ItemCard extends React.Component {
                 <br />
                 Description: { item.description }
                 <br />
-                <button>Add To Cart</button>
+                <button onClick={this.on_click_functions }>Add To Cart</button>
 			</div>
         )
     }

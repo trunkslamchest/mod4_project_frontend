@@ -15,6 +15,11 @@ class LogIn extends React.Component {
     })
   }
 
+  onSubmitFunctions = (event) => {
+    this.logInSubmitted(event)
+    this.props.update_cart()
+  }
+
   logInSubmitted = (event) => {
     event.preventDefault()
     fetch("http://localhost:3001/login", {
@@ -26,16 +31,17 @@ class LogIn extends React.Component {
         username: this.state.username,
         password: this.state.password
       })
-    }).then(response => response.json())
-      .then(res_obj => {
-        if (res_obj.errors) {
-          this.setState({
-            errors: res_obj.errors
-          })
-        } else {
-          this.props.setToken(res_obj)
-        }
-      })
+    })
+    .then(response => response.json())
+    .then(res_obj => {
+      if (res_obj.errors) {
+        this.setState({
+          errors: res_obj.errors
+        })
+      } else {
+        this.props.setToken(res_obj)
+      }
+    })
   }
 
   signUpSubmitted = (event) => {
@@ -45,9 +51,7 @@ class LogIn extends React.Component {
   render(){
     return <>
       <ul>
-        {
-          this.state.errors.map(error => <li>{ error }</li>)
-        }
+        { this.state.errors.map(error => <li>{ error }</li>) }
       </ul>
       {
         this.state.logIn
@@ -55,7 +59,7 @@ class LogIn extends React.Component {
         <section>
           <h2>Log In</h2>
           {/* <button onClick={ () => this.setState({ logIn: false }) }>I need to register!!!</button> */}
-          <form onSubmit={ this.logInSubmitted }>
+          <form onSubmit={ this.onSubmitFunctions }>
             <label  htmlFor="log_in_username">Username</label>
             <input  id="log_in_username"
                     type="text"

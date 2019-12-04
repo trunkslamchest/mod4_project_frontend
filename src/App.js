@@ -3,23 +3,24 @@ import './App.css';
 import Header from './Header'
 import LogIn from './LogIn'
 import ItemsContainer from './ItemsContainer'
-// import { Route, Switch } from 'react-router-dom'
-
 
 class App extends React.Component {
 
   state = {
     token: null,
     loggedInUserId: null,
+    new_cart: []
   }
 
   componentDidMount(){
     if (!localStorage.userId || !localStorage.token)  {
       localStorage.clear()
     } else {
+
       this.setState({
         token: localStorage.token,
-        loggedInUserId: localStorage.userId
+        loggedInUserId: localStorage.userId,
+        cart: this.update_cart()
       })
     }
   }
@@ -35,35 +36,70 @@ class App extends React.Component {
     })
   }
 
+  addToCart = (item) => {
+   fetch("http://localhost:3001/cart_items", {
+    headers: {
+      "Content-Type": "application/json"
+    },
+    method: "POST",
+    body: JSON.stringify({
+      user_id: this.state.loggedInUserId,
+      item_id: item
+    })
+   })
+   .then(response => response.json())
+   .then(res_obj =>
+      this.setState({
+        new_cart: [...this.state.new_cart, res_obj]
+      })
+    )
+  }
+
+  update_cart = () => {
+   fetch("http://localhost:3001/cart_items")
+    .then(response => response.json())
+    .then((res_obj) => {
+      this.setState({
+        new_cart: res_obj.filter(item => item.user_id === parseInt(this.state.loggedInUserId, 10))
+      })
+    })
+  }
+
+
   logOut = () => {
     localStorage.clear()
-
     this.setState({
       loggedInUserId: null,
-      token: null
+      token: null,
+      new_cart: []
     })
   }
 
   render(){
     console.log("UserID", this.state.loggedInUserId)
     console.log("token", this.state.token)
+    console.log("new cart", this.state.new_cart)
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     return (
       <main>
         <div className="Header">
           <Header
             token={ this.state.token }
+            cart={ this.state.cart }
             logOut={ this.logOut }
           />
         </div>
         {
           !!this.state.token ?
             <ItemsContainer
+              addToCart={ this.addToCart }
               token={ this.state.token }
               loggedInUserId={ this.state.loggedInUserId }
             />
             :
             <LogIn
               setToken={ this.setToken }
+              update_cart={ this.update_cart }
             />
         }
       </main>
