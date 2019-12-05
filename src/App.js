@@ -57,10 +57,6 @@ export default class App extends React.Component {
     )
   }
 
-  removeFromCart = (item_index) => {
-    console.log(item_index)
-  }
-
   update_cart = () => {
    fetch("http://localhost:3001/cart_items")
     .then(response => response.json())
@@ -117,7 +113,7 @@ export default class App extends React.Component {
               display={ this.state.display }
               cart={this.state.cart}
               addToCart={ this.addToCart }
-              removeFromCart={ this.removeFromCart }
+              // removeFromCart={ this.removeFromCart }
             />
             :
             <LogIn

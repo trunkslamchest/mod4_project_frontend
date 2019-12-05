@@ -25,7 +25,7 @@ export default class ItemsContainer extends React.Component {
       <CartList
         user={this.props.user}
         cart={this.props.cart}
-        removeFromCart={this.props.removeFromCart}
+        // removeFromCart={this.props.removeFromCart}
       />
 
     const showItems =

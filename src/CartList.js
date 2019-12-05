@@ -20,17 +20,27 @@ export default class CartList extends React.Component {
         })
     }
 
+  removeFromCart = (item_index) => {
+    console.log(item_index)
+    // fetch(`http://localhost:3001/cart_items/${item_index}`, {
+    //   method: "DELETE"
+    // })
+    // .then(res => res.json())
+    // .then()
+  }
+
     render(){
 
-        // console.log(this.state.cart[0])
+        // console.log(this.state.cart)
 
         const distribute_cart_items = this.state.cart.map((item, index) =>
-            <CartCard key={index+1} item={item} cart_item_id={index+1} removeFromCart={this.props.removeFromCart} />
+            <CartCard key={index+1} item={item} cart_item_id={index+1} removeFromCart={this.removeFromCart} />
         )
 
         return(
             <div>
-                { distribute_cart_items }
+                {/* { distribute_cart_items } */}
+                {(this.state.cart.length === 0) ? "Your Cart Is Currently Empty." : distribute_cart_items }
 			</div>
         )
     }

@@ -8,7 +8,9 @@ export default class CartCard extends React.Component {
 
     render(){
         
-        console.log(this.props.cart_item_id)
+        // console.log(this.props.cart_item_id)
+        console.log(this.props)
+        
 
         const cart_item = this.props.item
 
