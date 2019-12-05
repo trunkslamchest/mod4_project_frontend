@@ -2,16 +2,16 @@ import React from 'react';
 import './App.css';
 import Header from './Header'
 import LogIn from './LogIn'
-// import CartList from './CartList'
 import ItemsContainer from './ItemsContainer'
 // import { Route, Switch } from 'react-router-dom'
 
-class App extends React.Component {
+export default class App extends React.Component {
 
   state = {
     token: null,
     loggedInUserId: null,
-    cart: []
+    cart: [],
+    display: null,
   }
 
   componentDidMount(){
@@ -52,9 +52,13 @@ class App extends React.Component {
    .then(response => response.json())
    .then(res_obj =>
       this.setState({
-        cart: [...this.state.new_cart, res_obj]
+        cart: [...this.state.cart, res_obj]
       })
     )
+  }
+
+  removeFromCart = (item_index) => {
+    console.log(item_index)
   }
 
   update_cart = () => {
@@ -76,21 +80,31 @@ class App extends React.Component {
     })
   }
 
-  click_cart = (event) => {
-    return event
+  display_cart = () => {
+    this.setState({
+      display: "cart"
+    })
+  }
+
+  display_items = () => {
+    this.setState({
+      display: "items"
+    })
   }
 
   render(){
     // console.log("UserID", this.state.loggedInUserId)
     // console.log("token", this.state.token)
     // console.log("cart", this.state.new_cart)
+    // console.log("display", this.state.display)
     // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     return (
       <main>
         <div className="Header">
           <Header
             token={ this.state.token }
-            click_cart={ this.click_cart }
+            display_cart={ this.display_cart }
+            display_items={ this.display_items }
             logOut={ this.logOut }
           />
         </div>
@@ -98,11 +112,12 @@ class App extends React.Component {
         {
           !!this.state.token ?
             <ItemsContainer
+              token={ this.state.token }
+              user={ this.state.loggedInUserId }
+              display={ this.state.display }
               cart={this.state.cart}
               addToCart={ this.addToCart }
-              click_cart={ this.click_cart }
-              token={ this.state.token }
-              loggedInUserId={ this.state.loggedInUserId }
+              removeFromCart={ this.removeFromCart }
             />
             :
             <LogIn
@@ -114,5 +129,3 @@ class App extends React.Component {
     )
   }
 }
-
-export default App;

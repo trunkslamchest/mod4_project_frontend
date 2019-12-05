@@ -5,9 +5,8 @@ import CartList from './CartList';
 export default class ItemsContainer extends React.Component {
 
   state = {
-    cart: [],
     items: [],
-    display: true
+    display: null
   }
 
   componentDidMount(){
@@ -15,28 +14,31 @@ export default class ItemsContainer extends React.Component {
     .then(response => response.json())
     .then(res_obj =>
       this.setState({
-        items: res_obj.data,
+        items: res_obj.data
       })
     )
   }
 
   render(){
+
     const showCart =
-        <CartList
-          cart={this.props.cart}
-        />
+      <CartList
+        user={this.props.user}
+        cart={this.props.cart}
+        removeFromCart={this.props.removeFromCart}
+      />
 
     const showItems =
-        <ItemList
-          addToCart={this.props.addToCart}
-          items={ this.state.items }
-        />
+      <ItemList
+        addToCart={this.props.addToCart}
+        items={ this.state.items }
+      />
+
     return(
       <div>
-        {/* {(this.state.display) ? (showCart) : (showItems) } */}
-        { showItems }
-        {/* { showCart } */}
+        {(this.props.display === "cart") ? (showCart) : (showItems) }
       </div>
     )
+
   }
 }

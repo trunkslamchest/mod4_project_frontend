@@ -2,9 +2,15 @@ import React from 'react';
 
 export default class CartCard extends React.Component {
 
-    render(){
+    on_click_functions = () => {
+        this.props.removeFromCart(this.props.cart_item_id)
+    }
 
-        const cart_item = this.props.cart_item
+    render(){
+        
+        console.log(this.props.cart_item_id)
+
+        const cart_item = this.props.item
 
         return(
             <div className="item_card">
@@ -14,12 +20,9 @@ export default class CartCard extends React.Component {
             <br />
             Price: { cart_item.price }
             <br />
-            Category: { cart_item.category }
-            <br />
             Quantity: { cart_item.quantity }
             <br />
-            Description: { cart_item.description }
-            <br />
+            <button onClick={this.on_click_functions }>Remove</button>
             </div>
         )
     }

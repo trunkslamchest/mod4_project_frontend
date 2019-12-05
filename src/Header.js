@@ -3,8 +3,12 @@ import { NavLink } from 'react-router-dom'
 
 export default class Header extends React.Component {
 
-onClickFunctionsCart = (event) => {
-	this.props.click_cart(event)
+onClickFunctionsCart = () => {
+	this.props.display_cart()
+}
+
+onClickFunctionsItems = () => {
+	this.props.display_items()
 }
 
 onClickFunctionsLogOut = () => {
@@ -12,7 +16,6 @@ onClickFunctionsLogOut = () => {
 }
 
 	render(){
-		// console.log(this.props)
 		return(
 			<div>
 				<NavLink exact to="/">Home</NavLink>
@@ -24,6 +27,11 @@ onClickFunctionsLogOut = () => {
 				}
 				{ !!this.props.token ?
 					<button onClick={ this.onClickFunctionsCart }>Cart</button>
+				:
+					""
+				}
+				{ !!this.props.token ?
+					<button onClick={ this.onClickFunctionsItems }>Items</button>
 				:
 					""
 				}

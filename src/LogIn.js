@@ -1,6 +1,6 @@
 import React from 'react';
 
-class LogIn extends React.Component {
+export default class LogIn extends React.Component {
 
   state = {
     logIn: true,
@@ -63,9 +63,9 @@ class LogIn extends React.Component {
             <label  htmlFor="log_in_username">Username</label>
             <input  id="log_in_username"
                     type="text"
-                    onChange={ this.onChange /* for controlled form input status */ }
+                    onChange={ this.onChange }
                     name="username"
-                    value={ this.state.username /* for controlled form input status */ } />
+                    value={ this.state.username } />
             <label  htmlFor="log_in_password">Password</label>
             <input  id="log_in_password"
                     type="password"
@@ -98,7 +98,4 @@ class LogIn extends React.Component {
       }
     </>
   }
-
 }
-
-export default LogIn
