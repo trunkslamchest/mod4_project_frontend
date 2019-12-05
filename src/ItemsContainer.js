@@ -1,11 +1,13 @@
 import React from 'react';
 import ItemList from './ItemList';
-// import { Route, Switch } from 'react-router-dom'
+import CartList from './CartList';
 
 export default class ItemsContainer extends React.Component {
 
   state = {
-    items: []
+    cart: [],
+    items: [],
+    display: true
   }
 
   componentDidMount(){
@@ -13,18 +15,28 @@ export default class ItemsContainer extends React.Component {
     .then(response => response.json())
     .then(res_obj =>
       this.setState({
-        items: res_obj.data
+        items: res_obj.data,
       })
     )
   }
 
   render(){
-    console.log(this.props.click_cart)
-      return(
-          <ItemList
-            addToCart={this.props.addToCart}
-            items={ this.state.items }
-          />
-      )
+    const showCart =
+        <CartList
+          cart={this.props.cart}
+        />
+
+    const showItems =
+        <ItemList
+          addToCart={this.props.addToCart}
+          items={ this.state.items }
+        />
+    return(
+      <div>
+        {/* {(this.state.display) ? (showCart) : (showItems) } */}
+        { showItems }
+        {/* { showCart } */}
+      </div>
+    )
   }
 }
