@@ -12,14 +12,13 @@ export default class ItemsContainer extends React.Component {
     searchTerm: ''
   }
 
-
   sortByFilter = (event) => {
-      this.setState({
-        fiterTerm: this.state.items.filter(item => item.attributes.category === event)
-      })
-    }
+    this.setState({
+      fiterTerm: this.state.items.filter(item => item.attributes.category === event)
+    })
+  }
 
-handleChange = (e) => {
+  handleChange = (e) => {
     this.setState({
       searchTerm: e.target.value
     })

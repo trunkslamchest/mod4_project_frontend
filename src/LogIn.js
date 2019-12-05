@@ -17,7 +17,7 @@ export default class LogIn extends React.Component {
 
   onSubmitFunctions = (event) => {
     this.logInSubmitted(event)
-    this.props.update_cart()
+    this.props.updateCart()
   }
 
   logInSubmitted = (event) => {

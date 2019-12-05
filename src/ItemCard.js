@@ -9,7 +9,6 @@ export default class ItemCard extends React.Component {
     render(){
 
         const item = this.props.item.attributes
-        // console.log("item props", this.props)
 
         return(
             <div className="item_card">

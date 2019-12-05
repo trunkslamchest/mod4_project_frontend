@@ -22,7 +22,7 @@ export default class App extends React.Component {
       this.setState({
         token: localStorage.token,
         loggedInUserId: localStorage.userId,
-        cart: this.update_cart()
+        cart: this.updateCart()
       })
     }
   }
@@ -46,13 +46,14 @@ export default class App extends React.Component {
     method: "POST",
     body: JSON.stringify({
       user_id: this.state.loggedInUserId,
-      item_id: item
+      item_id: item,
+      cart_quantity: 1
     })
    })
    .then(response => response.json())
    .then(res_obj =>
       this.setState({
-        cart: this.update_cart()
+        cart: this.updateCart()
       })
     )
   }
@@ -68,7 +69,7 @@ export default class App extends React.Component {
     )
   }
 
-  update_cart = () => {
+  updateCart = () => {
    fetch("http://localhost:3001/cart_items")
     .then(response => response.json())
     .then((res_obj) => {
@@ -106,7 +107,7 @@ export default class App extends React.Component {
     // console.log("display", this.state.display)
     // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     return (
-      <main>
+      <div>
         <div className="Header">
           <Header
             token={ this.state.token }
@@ -125,14 +126,15 @@ export default class App extends React.Component {
               cart={this.state.cart}
               addToCart={ this.addToCart }
               removeFromCart={ this.removeFromCart }
+              updateCart = { this.updateCart}
             />
             :
             <LogIn
               setToken={ this.setToken }
-              update_cart={ this.update_cart }
+              updateCart={ this.updateCart }
             />
         }
-      </main>
+      </div>
     )
   }
 }

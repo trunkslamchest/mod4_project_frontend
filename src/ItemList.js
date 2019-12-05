@@ -4,7 +4,7 @@ import ItemCard from './ItemCard';
 export default class ItemList extends React.Component {
 
     render(){
-		// console.log(this.props.items)
+
 		const distribute_items = this.props.items.map(item =>
 			<ItemCard
 				key={item.id}
