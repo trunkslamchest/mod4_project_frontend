@@ -23,15 +23,15 @@ export default class ItemsContainer extends React.Component {
 
     const showCart =
       <CartList
-        user={this.props.user}
-        cart={this.props.cart}
-        // removeFromCart={this.props.removeFromCart}
+        user={ this.props.user }
+        cart={ this.props.cart }
+        removeFromCart={ this.props.removeFromCart }
       />
 
     const showItems =
       <ItemList
-        addToCart={this.props.addToCart}
         items={ this.state.items }
+        addToCart={this.props.addToCart}
       />
 
     return(

@@ -52,7 +52,18 @@ export default class App extends React.Component {
    .then(response => response.json())
    .then(res_obj =>
       this.setState({
-        cart: [...this.state.cart, res_obj]
+        cart: this.update_cart()
+      })
+    )
+  }
+
+  removeFromCart = (cart_item) => {
+    fetch(`http://localhost:3001/cart_items/${cart_item.item.id}`, {
+      method: "DELETE"
+    })
+    .then(
+      this.setState({
+        cart: this.state.cart.filter(item => item.id !== cart_item.item.id)
       })
     )
   }
@@ -91,7 +102,7 @@ export default class App extends React.Component {
   render(){
     // console.log("UserID", this.state.loggedInUserId)
     // console.log("token", this.state.token)
-    // console.log("cart", this.state.new_cart)
+    // console.log("cart", this.state.cart)
     // console.log("display", this.state.display)
     // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     return (
@@ -113,7 +124,7 @@ export default class App extends React.Component {
               display={ this.state.display }
               cart={this.state.cart}
               addToCart={ this.addToCart }
-              // removeFromCart={ this.removeFromCart }
+              removeFromCart={ this.removeFromCart }
             />
             :
             <LogIn

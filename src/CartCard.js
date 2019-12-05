@@ -3,16 +3,13 @@ import React from 'react';
 export default class CartCard extends React.Component {
 
     on_click_functions = () => {
-        this.props.removeFromCart(this.props.cart_item_id)
+        this.props.removeFromCart(this.props)
     }
 
     render(){
-        
-        // console.log(this.props.cart_item_id)
-        console.log(this.props)
-        
 
-        const cart_item = this.props.item
+        const cart_item = this.props.item.attributes.item
+        // console.log("cart props", this.props.item.attributes)
 
         return(
             <div className="item_card">

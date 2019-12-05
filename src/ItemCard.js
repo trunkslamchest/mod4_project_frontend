@@ -2,13 +2,14 @@ import React from 'react';
 
 export default class ItemCard extends React.Component {
 
-on_click_functions = () => {
-    this.props.addToCart(this.props.item.id)
-}
+    on_click_functions = () => {
+        this.props.addToCart(this.props.item.id)
+    }
 
     render(){
 
         const item = this.props.item.attributes
+        // console.log("item props", this.props)
 
         return(
             <div className="item_card">
