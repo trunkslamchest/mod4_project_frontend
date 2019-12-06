@@ -1,9 +1,11 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
 import Header from './Header'
 import LogIn from './LogIn'
+import SignUp from './SignUp'
 import ItemsContainer from './ItemsContainer'
 // import { Route, Switch } from 'react-router-dom'
+
+import './App.css'
 
 export default class App extends React.Component {
 
@@ -11,7 +13,7 @@ export default class App extends React.Component {
     token: null,
     loggedInUserId: null,
     cart: [],
-    display: null,
+    display: 'Login',
   }
 
   componentDidMount(){
@@ -81,13 +83,25 @@ export default class App extends React.Component {
 
   displayCart = () => {
     this.setState({
-      display: "cart"
+      display: 'Cart'
     })
   }
 
   displayItems = () => {
     this.setState({
-      display: "items"
+      display: 'Items'
+    })
+  }
+
+  displayLogin = () => {
+    this.setState({
+      display: 'Login'
+    })
+  }
+
+  displaySignUp = (event) => {
+    this.setState({
+      display: 'SignUp'
     })
   }
 
@@ -106,32 +120,63 @@ export default class App extends React.Component {
     // console.log("cart", this.state.cart)
     // console.log("display", this.state.display)
     // console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+    const showHeader =
+      <Header
+        token={ this.state.token }
+        displayLogin={ this.displayLogin }
+        displayCart={ this.displayCart }
+        displayItems={ this.displayItems }
+        logOut={ this.logOut }
+      />
+
+    const showItemsContainer =
+      <ItemsContainer
+        token={ this.state.token }
+        user={ this.state.loggedInUserId }
+        display={ this.state.display }
+        cart={this.state.cart}
+        addToCart={ this.addToCart }
+        removeFromCart={ this.removeFromCart }
+      />
+
+    const showLogIn =
+      <LogIn
+        setToken={ this.setToken }
+        displayLogin={ this.displayLogin }
+        displayItems={ this.displayItems }
+        updateCart={ this.updateCart }
+        displaySignUp={ this.displaySignUp }
+      />
+
+    const showSignUp =
+      <SignUp
+        setToken={ this.setToken }
+        displayLogin={ this.displayLogin }
+        displayItems={ this.displayItems }
+        updateCart={ this.updateCart }
+      />
+
     return (
       <div>
         <div className="Header">
-          <Header
-            token={ this.state.token }
-            displayCart={ this.displayCart }
-            displayItems={ this.displayItems }
-            logOut={ this.logOut }
-          />
+          { showHeader }
         </div>
 
         {
-          !!this.state.token ?
-            <ItemsContainer
-              token={ this.state.token }
-              user={ this.state.loggedInUserId }
-              display={ this.state.display }
-              cart={this.state.cart}
-              addToCart={ this.addToCart }
-              removeFromCart={ this.removeFromCart }
-            />
-            :
-            <LogIn
-              setToken={ this.setToken }
-              updateCart={ this.updateCart }
-            />
+          {
+            true: showItemsContainer,
+            false: (() => {
+              switch(this.state.display) {
+                case 'SignUp':
+                  return showSignUp;
+                case 'Login':
+                  return showLogIn;
+                default:
+                  return null;
+              }
+            })()
+          }[!!this.state.token]
         }
       </div>
     )

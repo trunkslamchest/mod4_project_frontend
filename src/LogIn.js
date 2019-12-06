@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default class LogIn extends React.Component {
 
@@ -18,7 +18,12 @@ export default class LogIn extends React.Component {
   onSubmitFunctions = (event) => {
     this.logInSubmitted(event)
     this.props.updateCart()
+    this.props.displayItems()
   }
+
+	onClickFunctionsSignUp = (event) => {
+		this.props.displaySignUp(event)
+	}
 
   logInSubmitted = (event) => {
     event.preventDefault()
@@ -35,6 +40,7 @@ export default class LogIn extends React.Component {
     .then(response => response.json())
     .then(res_obj => {
       if (res_obj.errors) {
+        this.props.displayLogin()
         this.setState({
           errors: res_obj.errors
         })
@@ -44,10 +50,6 @@ export default class LogIn extends React.Component {
     })
   }
 
-  // signUpSubmitted = (event) => {
-  //   event.preventDefault()
-  // }
-
   render(){
     return <>
       <ul>
@@ -56,9 +58,9 @@ export default class LogIn extends React.Component {
       {
         this.state.logIn
         ?
+        <div>
         <section>
           <h2>Log In</h2>
-          {/* <button onClick={ () => this.setState({ logIn: false }) }>I need to register!!!</button> */}
           <form onSubmit={ this.onSubmitFunctions }>
             <label  htmlFor="log_in_username">Username</label>
             <input  id="log_in_username"
@@ -74,11 +76,12 @@ export default class LogIn extends React.Component {
                     value={ this.state.password } />
             <input type="submit" />
           </form>
+          <button onClick={ this.onClickFunctionsSignUp }>Sign Up</button>
         </section>
+        </div>
         :
         <section>
           <h2>Sign up</h2>
-          {/* <button onClick={ () => this.setState({ logIn: true }) }>I already signed up!!!</button> */}
           <form onSubmit={ this.signUpSubmitted }>
             <label  htmlFor="sign_up_username">Username</label>
             <input  id="sign_up_username"

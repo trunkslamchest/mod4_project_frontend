@@ -59,7 +59,7 @@ export default class ItemsContainer extends React.Component {
       />
     return(
       <div>
-        {(this.props.display === "cart") ? (showCart) : (showItems) }
+        {(this.props.display === "Cart") ? (showCart) : (showItems) }
       </div>
     )
   }

@@ -1,5 +1,5 @@
-import React from 'react';
-import CartCard from './CartCard';
+import React from 'react'
+import CartCard from './CartCard'
 
 export default class CartList extends React.Component {
 
