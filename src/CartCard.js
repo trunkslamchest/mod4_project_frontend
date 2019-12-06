@@ -3,7 +3,17 @@ import React from 'react'
 export default class CartCard extends React.Component {
 
     state = {
-        cart_quantity: this.props.item.attributes.cart_quantity
+        cart_quantity: null
+    }
+
+    componentDidMount(){
+        fetch(`http://localhost:3001/cart_items/${this.props.item.id}`)
+        .then(res => res.json())
+        .then(res_obj =>
+            this.setState({
+                cart_quantity: res_obj.cart_quantity
+            })
+        )
     }
 
     onClickFunctionsRemoveFromCart = () => {
@@ -11,53 +21,53 @@ export default class CartCard extends React.Component {
     }
 
     onClickFunctionsAddQuantity = () => {
+        let quantity = this.state.cart_quantity
+
         this.setState({
-            cart_quantity: this.state.cart_quantity += 1
+            cart_quantity: quantity += 1
         })
     }
 
     onClickFunctionsRemoveQuantity = () => {
+        let quantity = this.state.cart_quantity
+
         this.setState({
-            cart_quantity: this.state.cart_quantity -= 1
+            cart_quantity: quantity -= 1
         })
     }
 
     onClickFunctionsUpdateQuantity = () => {
-
-        const options = {
+        // if (this.state.cart_quantity === 0) {}
+        fetch(`http://localhost:3001/cart_items/${this.props.item.id}`, {
             method: "PATCH",
             headers: {
                 "content-type":"application/json"
             },
-            body: JSON.stringify({ cart_quantity: this.state.cart_quantity })
-        }
-        fetch(`http://localhost:3001/cart_items/${this.props.item.id}`, options)
-        .then(this.setState({
-            cart_quantity: this.state.cart_quantity
-            }, console.log(this.state.cart_quantity))
-        )
+            body: JSON.stringify({
+                cart_quantity: this.state.cart_quantity
+            })
+        })
 
     }
 
     render(){
-        // console.log(this.state)
-        // console.log(this.props.item)
-        const cart_item = this.props.item.attributes.item
+
+        const cartItem = this.props.item.attributes.item
 
         return(
             <div className="item_card">
-                { cart_item.name }
+                { cartItem.name }
                 <br />
-                <img src={ cart_item.img_url } alt="test_img"/>
+                <img src={ cartItem.img_url } alt="test_img"/>
                 <br />
-                Price: { cart_item.price }
+                Price: { cartItem.price }
                 <br />
                 Quantity: { this.state.cart_quantity }
                 <button onClick={ this.onClickFunctionsAddQuantity }>+</button>
                 <button onClick={ this.onClickFunctionsRemoveQuantity }>-</button>
                 <button onClick={ this.onClickFunctionsUpdateQuantity }>Update Quantity</button>
                 <br />
-                <button onClick={this.onClickFunctionsRemoveFromCart }>Remove</button>
+                <button onClick={this.onClickFunctionsRemoveFromCart }>Remove From Cart</button>
             </div>
         )
     }

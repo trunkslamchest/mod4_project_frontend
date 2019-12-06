@@ -79,24 +79,24 @@ export default class App extends React.Component {
     })
   }
 
+  displayCart = () => {
+    this.setState({
+      display: "cart"
+    })
+  }
+
+  displayItems = () => {
+    this.setState({
+      display: "items"
+    })
+  }
+
   logOut = () => {
     localStorage.clear()
     this.setState({
       loggedInUserId: null,
       token: null,
       cart: []
-    })
-  }
-
-  display_cart = () => {
-    this.setState({
-      display: "cart"
-    })
-  }
-
-  display_items = () => {
-    this.setState({
-      display: "items"
     })
   }
 
@@ -111,8 +111,8 @@ export default class App extends React.Component {
         <div className="Header">
           <Header
             token={ this.state.token }
-            display_cart={ this.display_cart }
-            display_items={ this.display_items }
+            displayCart={ this.displayCart }
+            displayItems={ this.displayItems }
             logOut={ this.logOut }
           />
         </div>
@@ -126,7 +126,6 @@ export default class App extends React.Component {
               cart={this.state.cart}
               addToCart={ this.addToCart }
               removeFromCart={ this.removeFromCart }
-              updateCart = { this.updateCart}
             />
             :
             <LogIn

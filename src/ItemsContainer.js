@@ -12,6 +12,16 @@ export default class ItemsContainer extends React.Component {
     searchTerm: ''
   }
 
+  componentDidMount(){
+    fetch("http://localhost:3001/items")
+    .then(res => res.json())
+    .then(res_obj =>
+      this.setState({
+        items: res_obj.data
+      })
+    )
+  }
+
   sortByFilter = (event) => {
     this.setState({
       fiterTerm: this.state.items.filter(item => item.attributes.category === event)
@@ -22,16 +32,6 @@ export default class ItemsContainer extends React.Component {
     this.setState({
       searchTerm: e.target.value
     })
-  }
-
-  componentDidMount(){
-    fetch("http://localhost:3001/items")
-    .then(response => response.json())
-    .then(res_obj =>
-      this.setState({
-        items: res_obj.data
-      })
-    )
   }
 
   render(){
@@ -65,6 +65,6 @@ export default class ItemsContainer extends React.Component {
         {(this.props.display === "cart") ? (showCart) : (showItems) }
       </div>
     )
-
   }
+
 }

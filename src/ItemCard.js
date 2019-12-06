@@ -2,7 +2,7 @@ import React from 'react';
 
 export default class ItemCard extends React.Component {
 
-    on_click_functions = () => {
+    onClickFunctionsAdd = () => {
         this.props.addToCart(this.props.item.id)
     }
 
@@ -24,8 +24,9 @@ export default class ItemCard extends React.Component {
             <br />
             Description: { item.description }
             <br />
-            <button onClick={this.on_click_functions }>Add To Cart</button>
+            <button onClick={this.onClickFunctionsAdd }>Add To Cart</button>
             </div>
         )
     }
+
 }

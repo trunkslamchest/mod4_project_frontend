@@ -5,7 +5,7 @@ export default class CartList extends React.Component {
 
     render(){
 
-        const distribute_cart_items = this.props.cart.map((item, index) =>
+        const distributeCartItems = this.props.cart.map((item, index) =>
             <CartCard
                 key={index}
                 item={item}
@@ -15,7 +15,7 @@ export default class CartList extends React.Component {
 
         return(
             <div>
-                { distribute_cart_items }
+                { distributeCartItems }
             </div>
         )
     }

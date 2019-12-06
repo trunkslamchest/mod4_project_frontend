@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom'
 export default class Header extends React.Component {
 
 onClickFunctionsCart = () => {
-	this.props.display_cart()
+	this.props.displayCart()
 }
 
 onClickFunctionsItems = () => {
-	this.props.display_items()
+	this.props.displayItems()
 }
 
 onClickFunctionsLogOut = () => {
@@ -31,7 +31,7 @@ onClickFunctionsLogOut = () => {
 					""
 				}
 				{ !!this.props.token ?
-					<button onClick={ this.onClickFunctionsItems }>Items</button>
+					<button onClick={ this.onClickFunctionsItems }>Marketplace</button>
 				:
 					""
 				}
