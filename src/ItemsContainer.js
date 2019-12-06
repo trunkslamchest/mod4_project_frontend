@@ -1,15 +1,13 @@
 import React from 'react'
 import ItemList from './ItemList'
 import CartList from './CartList'
-import SearchBar from './SearchBar'
 
 export default class ItemsContainer extends React.Component {
 
   state = {
     items: [],
     display: null,
-    filterTerm: [],
-    searchTerm: ''
+    filterTerm: []
   }
 
   componentDidMount(){
@@ -22,11 +20,11 @@ export default class ItemsContainer extends React.Component {
     )
   }
 
-  sortByFilter = (event) => {
-    this.setState({
-      fiterTerm: this.state.items.filter(item => item.attributes.category === event)
-    })
-  }
+	filterItems = (event) => {
+		this.setState({
+		  items: this.state.items.filter(item => item.attributes.category === event.target.value)
+		})
+	}
 
   handleChange = (e) => {
     this.setState({
@@ -35,8 +33,6 @@ export default class ItemsContainer extends React.Component {
   }
 
   render(){
-
-    const searchedItem = this.state.items.filter(item => item.attributes.name.includes(this.state.searchTerm))
 
     const showCart =
       <CartList
@@ -47,21 +43,12 @@ export default class ItemsContainer extends React.Component {
 
     const showItems =
       <ItemList
-        // items={ this.state.items }
-        // items={ searchedItem }
-        items={this.state.filterTerm.length === 0 ? this.state.items : this.state.filterTerm}
+        filterItems={ this.filterItems }
+        items={ this.state.items }
         addToCart={this.props.addToCart}
       />
     return(
       <div>
-        <label>
-          Search: <input value={this.state.searchTerm} onChange={this.handleChange} type="search"/>
-        </label>
-
-        <SearchBar
-          sortByFilter={this.sortByFilter}
-        />
-
         {(this.props.display === "cart") ? (showCart) : (showItems) }
       </div>
     )

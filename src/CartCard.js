@@ -47,7 +47,6 @@ export default class CartCard extends React.Component {
                 cart_quantity: this.state.cart_quantity
             })
         })
-
     }
 
     render(){
