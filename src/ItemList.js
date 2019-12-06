@@ -19,7 +19,7 @@ export default class ItemList extends React.Component {
 
 	render(){
 
-    	const searchedItem = this.props.items.filter(item => item.attributes.name.includes(this.state.searchTerm))
+    	const searchedItem = this.props.items.filter(item => item.attributes.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
 
 		const distributeItems = searchedItem.map(item =>
 			<ItemCard
