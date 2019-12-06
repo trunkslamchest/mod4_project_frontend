@@ -6,8 +6,8 @@ export default class ItemsContainer extends React.Component {
 
   state = {
     items: [],
-    display: null,
-    filterTerm: []
+    showItems: [],
+    display: null
   }
 
   componentDidMount(){
@@ -15,20 +15,30 @@ export default class ItemsContainer extends React.Component {
     .then(res => res.json())
     .then(res_obj =>
       this.setState({
-        items: res_obj.data
+        items: res_obj.data,
+        showItems: res_obj.data
       })
     )
   }
 
 	filterItems = (event) => {
-		this.setState({
-		  items: this.state.items.filter(item => item.attributes.category === event.target.value)
-		})
+    const filter_type = event.target.value
+
+    if (filter_type === "All") {
+      this.setState({
+        showItems: this.state.items
+      })
+    } else {
+  		this.setState({
+  		  showItems: this.state.items.filter(item => item.attributes.category === filter_type)
+  		})
+    }
+
 	}
 
-  handleChange = (e) => {
+  handleChange = (event) => {
     this.setState({
-      searchTerm: e.target.value
+      searchTerm: event.target.value
     })
   }
 
@@ -44,7 +54,7 @@ export default class ItemsContainer extends React.Component {
     const showItems =
       <ItemList
         filterItems={ this.filterItems }
-        items={ this.state.items }
+        items={ this.state.showItems }
         addToCart={this.props.addToCart}
       />
     return(

@@ -38,6 +38,7 @@ export default class ItemList extends React.Component {
 			        <label>
 			          <strong>Filter:</strong>
 			          <select onChange={ this.onChangeFunctionsFilter }>
+			            <option value="All">All</option>
 			            <option value="Shoes">Shoes</option>
 			            <option value="Electronics">Electronics</option>
 			          </select>
