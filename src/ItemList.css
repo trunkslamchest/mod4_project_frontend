@@ -1,0 +1,27 @@
+
+.item_filters {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: flex-end;
+	padding: 10px;
+	margin: 2.5px;
+}
+
+.item_filters label {
+	/* font-family:PT Sans; */
+	font-family:Lato;
+}
+
+.item_list {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: flex-start;
+	padding: 10px;
+	margin: 2.5px;
+}

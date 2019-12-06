@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './Login.css'
+
 export default class LogIn extends React.Component {
 
   state = {
@@ -46,6 +48,7 @@ export default class LogIn extends React.Component {
         })
       } else {
         this.props.setToken(res_obj)
+        this.props.getUser(res_obj)
       }
     })
   }
@@ -58,8 +61,7 @@ export default class LogIn extends React.Component {
       {
         this.state.logIn
         ?
-        <div>
-        <section>
+        <div className="login_wrapper">
           <h2>Log In</h2>
           <form onSubmit={ this.onSubmitFunctions }>
             <label  htmlFor="log_in_username">Username</label>
@@ -74,30 +76,12 @@ export default class LogIn extends React.Component {
                     onChange={ this.onChange }
                     name="password"
                     value={ this.state.password } />
-            <input type="submit" />
+            <input className="login_button" type="submit" />
           </form>
-          <button onClick={ this.onClickFunctionsSignUp }>Sign Up</button>
-        </section>
+          <button className="login_button" onClick={ this.onClickFunctionsSignUp }>Sign Up</button>
         </div>
         :
-        <section>
-          <h2>Sign up</h2>
-          <form onSubmit={ this.signUpSubmitted }>
-            <label  htmlFor="sign_up_username">Username</label>
-            <input  id="sign_up_username"
-                    type="text"
-                    onChange={ this.onChange }
-                    name="username"
-                    value={ this.state.username } />
-            <label  htmlFor="sign_up_password">Password</label>
-            <input  id="sign_up_password"
-                    type="password"
-                    onChange={ this.onChange }
-                    name="password"
-                    value={ this.state.password } />
-            <input type="submit" />
-          </form>
-        </section>
+			""
       }
     </>
   }

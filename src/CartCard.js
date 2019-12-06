@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './CartCard.css'
+
 export default class CartCard extends React.Component {
 
     state = {
@@ -54,20 +56,25 @@ export default class CartCard extends React.Component {
         const cartItem = this.props.item.attributes.item
 
         return(
-            <div className="item_card">
-                { cartItem.name }
+            <div className="cart_card">
+				<div className="item_name_picture_price">
+               		{ cartItem.name }
                 <br />
-                <img src={ cartItem.img_url } alt="test_img"/>
-                <br />
-                Price: { cartItem.price }
-                <br />
-                Quantity: { this.state.cart_quantity }
-                <button onClick={ this.onClickFunctionsAddQuantity }>+</button>
-                <button onClick={ this.onClickFunctionsRemoveQuantity }>-</button>
-                <button onClick={ this.onClickFunctionsUpdateQuantity }>Update Quantity</button>
-                <br />
+             	   <img src={ cartItem.img_url } alt="test_img"/>
+				</div>
+				<div className="item_price">
+		        ${ cartItem.price }/each
+				</div>
+				<div className="item_quantity">
+		            Quantity: { this.state.cart_quantity }
+		            <button onClick={ this.onClickFunctionsAddQuantity }>+</button>
+		            <button onClick={ this.onClickFunctionsRemoveQuantity }>-</button>
+		            <button onClick={ this.onClickFunctionsUpdateQuantity }>Update Quantity</button>
+                </div>
+				<div className="cart_remove_button">
                 <button onClick={this.onClickFunctionsRemoveFromCart }>Remove From Cart</button>
-            </div>
+				</div>
+			</div>
         )
     }
 }

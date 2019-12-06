@@ -1,6 +1,8 @@
 import React from 'react'
 import CartCard from './CartCard'
 
+import './CartList.css'
+
 export default class CartList extends React.Component {
 
     render(){

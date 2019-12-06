@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './ItemCard.css'
+
 export default class ItemCard extends React.Component {
 
     onClickFunctionsAdd = () => {
@@ -12,19 +14,23 @@ export default class ItemCard extends React.Component {
 
         return(
             <div className="item_card">
-            { item.name }
-            <br />
-            <img src={ item.img_url } alt="test_img"/>
-            <br />
-            Price: { item.price }
-            <br />
-            Category: { item.category }
-            <br />
-            Quantity: { item.quantity }
-            <br />
-            Description: { item.description }
-            <br />
-            <button onClick={this.onClickFunctionsAdd }>Add To Cart</button>
+	            <h1>
+					{ item.name }
+				</h1>
+	            <div className="item_card_img_frame">
+	            <img src={ item.img_url } alt="test_img"/>
+	            </div>
+				<div className="item_card_info">
+	            ${ item.price }
+	            <br />
+	            { item.category }
+	            <br />
+	            { item.quantity } Left
+	            <br />
+	            { item.description }
+	            <br />
+				</div>
+	            <button onClick={this.onClickFunctionsAdd }>Add To Cart</button>
             </div>
         )
     }

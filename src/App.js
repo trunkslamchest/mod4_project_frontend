@@ -12,6 +12,7 @@ export default class App extends React.Component {
   state = {
     token: null,
     loggedInUserId: null,
+	username: null,
     cart: [],
     display: 'Login',
   }
@@ -24,21 +25,29 @@ export default class App extends React.Component {
       this.setState({
         token: localStorage.token,
         loggedInUserId: localStorage.userId,
+		username: localStorage.username,
         cart: this.updateCart()
       })
     }
   }
 
-  setToken = ({ token, user_id })  =>{
+  setToken = ({ token, user_id, username })  =>{
 
     localStorage.token = token
     localStorage.userId = user_id
+	localStorage.username = username
 
     this.setState({
       token: token,
       loggedInUserId: user_id
     })
   }
+
+	getUser = (user) => {
+		this.setState({
+			username: user.username
+		})
+	}
 
   addToCart = (item) => {
    fetch("http://localhost:3001/cart_items", {
@@ -124,6 +133,7 @@ export default class App extends React.Component {
     const showHeader =
       <Header
         token={ this.state.token }
+		getUser={ this.state.username }
         displayLogin={ this.displayLogin }
         displayCart={ this.displayCart }
         displayItems={ this.displayItems }
@@ -143,6 +153,7 @@ export default class App extends React.Component {
     const showLogIn =
       <LogIn
         setToken={ this.setToken }
+		getUser={ this.getUser }
         displayLogin={ this.displayLogin }
         displayItems={ this.displayItems }
         updateCart={ this.updateCart }
@@ -158,11 +169,11 @@ export default class App extends React.Component {
       />
 
     return (
-      <div>
+      <>
         <div className="Header">
           { showHeader }
         </div>
-
+		<div className="main_wrapper">
         {
           {
             true: showItemsContainer,
@@ -178,7 +189,8 @@ export default class App extends React.Component {
             })()
           }[!!this.state.token]
         }
-      </div>
+		</div>
+      </>
     )
   }
 }

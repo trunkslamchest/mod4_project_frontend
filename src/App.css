@@ -1,20 +1,11 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Lato|PT+Sans);
+
 .App {
   text-align: center;
 }
 
 .App-logo {
   height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -30,51 +21,10 @@ form input {
   margin-bottom: 10px;
 }
 
-.Header {
-  background-color: #222;
-  position: relative;
-  /* width: 100%; */
-  top: 0px;
-  /* height: 150px;*/
-  padding: 20px;
-  color: white;
-}
-
-.Header a {
-  color: white;
-  text-decoration: none;
-  padding: 15px;
-}
-
-.active {
-  color: black;
-  background: orange;
-}
-
-.item_list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 2.5px;
-  margin: 2.5px;
-}
-
-.item_card {
-  padding: 5px;
-  margin: 5px;
-  border: 1px solid;
-}
-
-.item_card img {
-  width: 150px
-}
-
-.item_card button {
-  padding: 5px;
-  margin: 5px;
-}
-
-.home_button {
-  
+.main_wrapper {
+	width: 80%;
+	margin: 0 auto 0 auto;
+	padding: 5px;
+	background-color: #fffdf7;
+	box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25), 0 0 5px 0 rgba(0, 0, 0, 0.25), 0 0 5px 0 rgba(0, 0, 0, 0.25);
 }

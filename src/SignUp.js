@@ -1,5 +1,7 @@
 import React from 'react'
 
+import './SignUp.css'
+
 export default class SignUp extends React.Component {
 
 	state = {
@@ -43,8 +45,7 @@ export default class SignUp extends React.Component {
 	render(){
 
 		return(
-			<div>
-	        	<section>
+			<div className="signup_wrapper">
 				<h2>Sign Up</h2>
 					<form onSubmit={ this.onClickFunctionsSubmitSignUp }>
 						<label htmlFor='sign_up_username'>Username</label>
@@ -59,9 +60,8 @@ export default class SignUp extends React.Component {
 						       onChange={ this.onChange }
 						       name="password"
 						       value={ this.state.password } />
-						<input type="submit" />
+						<input className="signup_button" type="submit" />
 					</form>
-				</section>
 			</div>
 		)
 
