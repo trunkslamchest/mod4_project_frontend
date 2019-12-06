@@ -23,8 +23,6 @@ onClickFunctionsHome = () => {
 }
 
 	render(){
-		
-		console.log(this.props.getUser)
 		return(
 			<>
 				<div className="header_left">
